@@ -1,5 +1,4 @@
 import pyautogui
-import keyboard
 import python_imagesearch.imagesearch as imgsearch
 import sys
 import time
@@ -19,9 +18,9 @@ Second mode is bot for wax drops on atomic hub
 Third mode is for binance drop
 To choose the mode you should remove the '#' symbol
 '''
-mode = "coord"
+# mode = "coord"
 # mode = "bot"
-# mode = "bin"
+mode = "bin"
 
 '''
 this variables store the coordinates of buttons
@@ -32,11 +31,6 @@ captcha_button = (834, 560)
 pay_button = (953, 628)
 pay_button_without_captcha = (955, 541)
 
-# coordinates to binance drop
-buy_bin = (1169, 761)
-pay_bin = (1029, 813)
-max_bin = (1240, 571)
-
 
 def run():
     # infinite loop
@@ -46,26 +40,18 @@ def run():
             try:
                 # finding max button on screen
                 if imgsearch.imagesearch("img/max-bin.png")[0] != -1:
-                    pyautogui.click(max_bin)
-                    # the flag
-                    bool = False
+                    pyautogui.click(imgsearch.imagesearch("img/max-bin.png")[0] + 20, imgsearch.imagesearch("img/max-bin.png")[1] + 20)
 
                     # finding buy button
-                    while not bool:
+                    while True:
                         if imgsearch.imagesearch("img/buy-bin.png")[0] != -1:
-                            pyautogui.click(buy_bin)
+                            pyautogui.click(imgsearch.imagesearch("img/buy-bin.png")[0], imgsearch.imagesearch("img/buy-bin.png")[1])
+
                             # finding pay button
-                            while not bool:
+                            while True:
                                 if imgsearch.imagesearch("img/pay-bin.png")[0] != -1:
-                                    pyautogui.click(pay_bin)
-                                    bool = True
+                                    pyautogui.click(imgsearch.imagesearch("img/pay-bin.png")[0], imgsearch.imagesearch("img/pay-bin.png")[1])
                                     sys.exit(0)
-
-                                time.sleep(0.1)
-
-                        time.sleep(0.1)
-
-                time.sleep(0.1)
 
             except:
                 # If an error occurred
